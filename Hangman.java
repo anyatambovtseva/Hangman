@@ -8,12 +8,13 @@ import java.util.Scanner;
 
 public class Hangman
 {
-    private static List<String> words = new ArrayList<>();
+    private static List<String> words = new ArrayList<>(); //todo статика -> убрать
     private static final int MAX_TRIES = 5;
 
+    // todo сейчас здесь всё намешано - и чтение и запись в консоль и сама логика игры - нужно разнести по разным классам
     public static void main(String[] args)
     {
-        loadWordsFromFile("C:/Users/79326/Desktop/виселица.txt");
+        loadWordsFromFile("C:/Users/79326/Desktop/виселица.txt"); // todo чтение файла из папки resources
         Scanner scanner = new Scanner(System.in);
         boolean playAgain;
 
@@ -21,6 +22,7 @@ public class Hangman
 
         do
         {
+            // todo сейчас здесь может поиграть только один игрок, создайте класс для игрока и храните там информацию
             playAgain = false;
             String wordToGuess = getRandomWord();
             StringBuilder guessedWord = new StringBuilder("_".repeat(wordToGuess.length()));
@@ -43,7 +45,7 @@ public class Hangman
                 if (input.equals("/exit"))
                 {
                     System.out.println("Вы вышли из игры. Спасибо за игру!");
-                    scanner.close();
+                    scanner.close(); // todo он тут не нужен, в конце цикла уже есть этот вызов
                     return;
                 }
 
@@ -103,7 +105,7 @@ public class Hangman
         scanner.close();
     }
 
-    private static void loadWordsFromFile(String filename)
+    private static void loadWordsFromFile(String filename) //todo статика -> убрать
     {
         try (BufferedReader br = new BufferedReader(new FileReader(filename)))
         {
@@ -119,14 +121,14 @@ public class Hangman
         }
     }
 
-    private static String getRandomWord()
+    private static String getRandomWord() //todo статика -> убрать
     {
         Random random = new Random();
         int index = random.nextInt(words.size());
         return words.get(index);
     }
 
-    private static void printWelcomeMessage()
+    private static void printWelcomeMessage() //todo статика -> убрать
     {
         System.out.println("Добро пожаловать в игру 'Виселица'!");
         System.out.println("Правила игры:");
@@ -138,7 +140,7 @@ public class Hangman
         System.out.println("Удачи!");
     }
 
-    private static void printHelpMessage()
+    private static void printHelpMessage() //todo статика -> убрать
     {
         System.out.println("Правила игры:");
         System.out.println("1. Я загадаю слово на тему животные, а вы будете пытаться его угадать, вводя буквы.");
